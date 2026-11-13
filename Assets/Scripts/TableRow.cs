@@ -1,0 +1,101 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System;
+using System.Collections.Generic;
+using TMPro;
+
+public class TableRow : MonoBehaviour
+{
+    public int rowIndex;
+    public bool solved = false;
+    public PhonemeTableHandler phonemeTableHandler;
+    public List<string> entries = new List<string>() { "", "", "" }; // keep track of row entries with a simple List
+
+    public TMP_InputField spellingInputField;
+    public TMP_Dropdown soundsLikeDropdown;
+    public TMP_InputField asInInputField;
+
+    public GameObject arrow;
+    public Button deleteRowButton;
+    
+    // public TMP_FontAsset draftFont;
+    public TMP_FontAsset correctFont;
+    
+    
+    void Start()
+    {
+        phonemeTableHandler = GetComponentInParent<PhonemeTableHandler>();
+        SetSoundsLikeOptions(phonemeTableHandler.soundsLikeOptions);
+        
+        spellingInputField.onValueChanged.AddListener(delegate { UpdateEntries(); }); // delegate thing ignores the argument
+        soundsLikeDropdown.onValueChanged.AddListener(delegate { UpdateEntries(); });
+        asInInputField.onValueChanged.AddListener(delegate { UpdateEntries(); });
+    }
+    
+    // stupid but this whole section is just the delete button
+
+    public void OnPointerEnterDeleteButton()
+    {
+        // Debug.Log("Pointer Enter Delete Button");
+        ShowDeleteButton();
+    }
+    
+    public void OnPointerExitDeleteButton()
+    {
+        // Debug.Log("Pointer Exit Delete Button");
+        HideDeleteButton();
+    }
+
+    public void HideDeleteButton()
+    {
+        deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = false;
+        deleteRowButton.interactable = false;
+    }
+
+    public void ShowDeleteButton()
+    {
+        deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = true;
+        deleteRowButton.interactable = true;
+    }
+    
+    public void DeleteRow()
+    {
+        Destroy(gameObject);
+    }
+    
+    //--------------------------------------------------------------------------------
+    
+    public void UpdateEntries()
+    {
+        // update entries list
+        entries[0] = spellingInputField.text;
+        entries[1] = soundsLikeDropdown.options[soundsLikeDropdown.value].text;
+        entries[2] = asInInputField.text;
+        
+        Debug.Log($"Row updated! Current entries: {string.Join(", ", entries)}");
+        phonemeTableHandler.OnRowUpdate(this);
+    }
+    
+    public void SetSoundsLikeOptions(List<string> options)
+    {
+        soundsLikeDropdown.ClearOptions();
+        soundsLikeDropdown.AddOptions(options);
+    }
+
+    public void DisableInput()
+    {
+        spellingInputField.interactable = false;
+        soundsLikeDropdown.interactable = false;
+        asInInputField.interactable = false;
+        deleteRowButton.gameObject.SetActive(false); // also remove deleteButton
+        arrow.SetActive(false);
+    }
+
+    public void ChangeFont()
+    {
+        spellingInputField.fontAsset = correctFont;
+        soundsLikeDropdown.captionText.font = correctFont;
+        asInInputField.fontAsset = correctFont;
+    }
+}
