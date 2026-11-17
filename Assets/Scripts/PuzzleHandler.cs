@@ -10,8 +10,8 @@ public class PuzzleHandler : JournalPage
     public bool typeSolved = false;
     public bool letterSolved = false;
     
-    public Image puzzleImage; // apparently just setting these types of objects manually in inspector is easier and more robust to changes
-    public Sprite puzzleSprite; // what image to display (e.g. drawing of a fish)
+    // public Image puzzleImage; // apparently just setting these types of objects manually in inspector is easier and more robust to changes
+    // public Sprite puzzleSprite; // what image to display (e.g. drawing of a fish)
     public string englishAnswer; // the correct answer, spelled in regular English (e.g. fish)
     public string ghotiAnswer; // the correct answer, spelled in ghoti (e.g. ghoti)
 
@@ -25,12 +25,12 @@ public class PuzzleHandler : JournalPage
     public Transform letterContainer;
     public List<LetterHandler> letterHandlers = new List<LetterHandler>();
 
+	public TMP_Text soundsLikeText;
+
     public RectTransform inputField;
 
     public LetterInputHandler letterInputHandler;
     public TypeInputHandler typeInputHandler;
-
-    public GameObject preview;
 
 	public Animator animator;
     public bool hasBeenOpened = false;
@@ -38,10 +38,8 @@ public class PuzzleHandler : JournalPage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        // (temporary) Disable the preview
-        preview.SetActive(false);
         // Create the puzzle
-        puzzleImage.sprite = puzzleSprite;
+        // puzzleImage.sprite = puzzleSprite;
         GenerateTypeSlots();
         GenerateLetterSlots();
         GenerateLetterBank();

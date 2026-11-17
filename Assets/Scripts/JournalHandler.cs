@@ -3,31 +3,45 @@ using System.Collections.Generic;
 
 public class JournalHandler : MonoBehaviour
 {
+	public GameObject IconCanvas;
+    public UIIcon journalIcon;
+    
     // want this to do stuff like buttons, turning pages, etc.
     private List<JournalPage> pages = new List<JournalPage>();
     private JournalPage currentPage;
     private int currentPageNumber = 0;
     public JournalPage phonemeTablePage;
 
+
     void Awake()
     {
+        
+    }
+
+	public void Initialize()
+	{
         Debug.Log("Adding phoneme table page");
         AddPage(phonemeTablePage); // just make the phoneme table page 0 for now
-    }
+	}
     
     public void CloseJournal()
     {
         gameObject.SetActive(false);
+		IconCanvas.SetActive(true); // show icons
     }
     
     public void OpenJournal()
     {
+        journalIcon.StopAnimation();
         gameObject.SetActive(true);
+		IconCanvas.SetActive(false); // hide icons
     }
 
     public void AddPage(JournalPage page)
     {
         // adds a new page to the end
+		Debug.Log("Adding page");
+		Debug.Log(pages.Count);
         page.pageNumber = pages.Count; // assign page number
         pages.Add(page);
     }

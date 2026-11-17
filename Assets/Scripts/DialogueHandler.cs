@@ -7,42 +7,68 @@ public class DialogueHandler : MonoBehaviour
 {
     // this is a component of the thought bubble object itself 
     public TMP_Text dialogueText;
-    public CanvasGroup uICanvasGroup;
+    // public CanvasGroup uICanvasGroup;
     public float typingSpeed = 0.01f; // controls speed of typewriter effect
+    private bool clicked;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
+    void Update()
+    {
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            clicked = true;
+    }
 
     public IEnumerator PlayLines(string[] lines)
     {
-        Debug.Log("Playing lines");
         gameObject.SetActive(true);
-
-        uICanvasGroup.interactable = false;
-        uICanvasGroup.blocksRaycasts = false;
 
         foreach (string line in lines)
         {
-            yield return StartCoroutine(PlayLine(line));
-            // yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); 
-            yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);// Wait for player to click before showing next line
+            clicked = false;
+            yield return PlayLine(line);
+
+            clicked = false;
+            yield return new WaitUntil(() => clicked);
         }
 
         gameObject.SetActive(false);
-        uICanvasGroup.interactable = true;
-        uICanvasGroup.blocksRaycasts = true;
     }
 
+    // IEnumerator PlayLine(string line)
+    // {
+    //     dialogueText.text = "";
+    //
+    //     foreach (char letter in line)
+    //     {
+    //         if (clicked)
+    //         {
+    //             dialogueText.text = line;
+    //             yield break;
+    //         }
+    //
+    //         dialogueText.text += letter;
+    //         yield return new WaitForSeconds(typingSpeed);
+    //     }
+    // }
+    
     IEnumerator PlayLine(string line)
     {
-        // plays one line with type writer effect
-        dialogueText.text = "";
-        foreach (char letter in line)
+        dialogueText.text = line;
+        dialogueText.maxVisibleCharacters = 0;
+
+        for (int i = 0; i <= line.Length; i++)
         {
-            dialogueText.text += letter;
+            if (clicked)
+            {
+                dialogueText.maxVisibleCharacters = line.Length;
+                yield break;
+            }
+
+            dialogueText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(typingSpeed);
         }
     }

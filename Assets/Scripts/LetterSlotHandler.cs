@@ -23,7 +23,7 @@ public class LetterSlotHandler : MonoBehaviour, IDropHandler
     }
 
     public void OnDrop(PointerEventData eventData) {
-		// Debug.Log("Dropped");
+		Debug.Log("Dropped");
         if (eventData.pointerDrag != null) { // eventData.pointerDrag is the GameObject that was dragged in ofc
             eventData.pointerDrag.transform.position = transform.position;
 

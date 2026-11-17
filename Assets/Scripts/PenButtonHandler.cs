@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PenButtonHandler : MonoBehaviour
+public class PenButtonHandler : UIIcon
 {
     // basically like for the most part I want this to be displayed, but do nothing when clicked
     // it's only in a Zoomed view, once all the letters have been clicked, that it's capable of pulling up puzzle
@@ -12,6 +12,7 @@ public class PenButtonHandler : MonoBehaviour
     public JournalHandler journalHandler;
     
     public ZoomHandler zoomHandler;
+	public UIIcon journalIcon;
     
     public void Activate(PuzzleHandler setPuzzleHandler, ZoomHandler setZoomHandler)
     {
@@ -27,16 +28,19 @@ public class PenButtonHandler : MonoBehaviour
 
     public void OnClick()
     {
-		Debug.Log(zoomHandler);
+		StopAnimation();
         if (zooms.activeSelf && zoomHandler.allLettersClicked)
         {
             Debug.Log("Pen clicked");
-			zoomHandler.SketchAppear();
+			StartCoroutine(zoomHandler.SketchAppear());
 			journalHandler.DisplayPage(puzzleHandler, false);
 			// make Journal wiggle after animation is done
-            // journalHandler.DisplayPage(puzzleHandler);
             Deactivate();
         }
         
     }
+
+	
+
+
 }

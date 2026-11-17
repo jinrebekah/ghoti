@@ -272,8 +272,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51235507b9234fb0ad476ef6a1b7ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  clicked: 0
+  isPuzzle: 1
   puzzleHandler: {fileID: 0}
   zoomHandler: {fileID: 0}
+  buttonAnimator: {fileID: 333871424291020149}
 --- !u!95 &333871424291020149
 Animator:
   serializedVersion: 7

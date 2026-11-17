@@ -483,10 +483,10 @@ CanvasGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663593607588440799}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &2457484302651806903
 MonoBehaviour:
@@ -1739,8 +1739,6 @@ MonoBehaviour:
   pageNumber: 0
   typeSolved: 0
   letterSolved: 0
-  puzzleImage: {fileID: 969637308594325503}
-  puzzleSprite: {fileID: 8966945178157639174, guid: 69b01077465a142babd79bc6f8424b64, type: 3}
   englishAnswer: fish
   ghotiAnswer: ghoti
   typeSlotPrefab: {fileID: 205903291948115843, guid: 9ff264667ba784d348a56294520f38cc, type: 3}
@@ -1750,10 +1748,10 @@ MonoBehaviour:
   letterPrefab: {fileID: 576659306558047682, guid: cee44894583d840e0ba37ae62e4ecd56, type: 3}
   letterContainer: {fileID: 3494735370814547343}
   letterHandlers: []
+  soundsLikeText: {fileID: 4585105989234896781}
   inputField: {fileID: 9184315693267757261}
   letterInputHandler: {fileID: 2457484302651806903}
   typeInputHandler: {fileID: 5558708336158528261}
-  preview: {fileID: 7360361567261076082}
   animator: {fileID: 0}
   hasBeenOpened: 0
 --- !u!1 &7038222261080925428

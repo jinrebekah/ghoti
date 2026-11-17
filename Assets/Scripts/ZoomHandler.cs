@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 public class ZoomHandler : MonoBehaviour
 {
@@ -21,6 +23,9 @@ public class ZoomHandler : MonoBehaviour
 	public Vector2 zoomCameraPosition; // save position of ZoomCamera 
 	public Transform zoomCamera;
 	public Vector2 zoomReferenceResolution; // for the pixel perfect camera
+	
+	public UIIcon journalIcon;
+	public UIIcon penIcon;
     
     void Start()
     {
@@ -64,18 +69,22 @@ public class ZoomHandler : MonoBehaviour
 
     public void OnLetterClick()
     {
+		// add a little jump to journal each click to make it look like you're adding it to the journal
+		journalIcon.Jump(loop: false);
         numLettersClicked++;
         Debug.Log(numLettersClicked);
         if (numLettersClicked == numLetters)
         {
             Debug.Log("All clicked");
-            // wiggle penButton
+            penIcon.Jump(loop: true); // wiggle penButton
             allLettersClicked = true;
         } 
     }
 
-    public void SketchAppear()
+    public IEnumerator SketchAppear()
     {
         animator.Play("SketchAppear", 0, 0f);
+		yield return new WaitForSeconds(2.5f);
+		journalIcon.Jump(loop: true); // wiggle journalButton
     }
 }

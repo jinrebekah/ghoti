@@ -26,48 +26,73 @@ public class TableRow : MonoBehaviour
     void Start()
     {
         phonemeTableHandler = GetComponentInParent<PhonemeTableHandler>();
-        SetSoundsLikeOptions(phonemeTableHandler.soundsLikeOptions);
+        // SetSoundsLikeOptions(phonemeTableHandler.soundsLikeOptions);
         
         spellingInputField.onValueChanged.AddListener(delegate { UpdateEntries(); }); // delegate thing ignores the argument
         soundsLikeDropdown.onValueChanged.AddListener(delegate { UpdateEntries(); });
         asInInputField.onValueChanged.AddListener(delegate { UpdateEntries(); });
+        
+        spellingInputField.onValidateInput += ValidateSpellingInput;
+        asInInputField.onValidateInput += ValidateAsInInput;
+    }
+    
+    char ValidateSpellingInput(string text, int charIndex, char addedChar)
+    {
+        if (!char.IsLetter(addedChar))
+        {
+            return '\0';
+        }
+        return char.ToUpper(addedChar);
+    }
+    
+    char ValidateAsInInput(string text, int charIndex, char addedChar)
+    {
+        if (!char.IsLetter(addedChar))
+        {
+            return '\0';
+        }
+        return char.ToLower(addedChar);
     }
     
     // stupid but this whole section is just the delete button
 
-    public void OnPointerEnterDeleteButton()
-    {
-        // Debug.Log("Pointer Enter Delete Button");
-        ShowDeleteButton();
-    }
-    
-    public void OnPointerExitDeleteButton()
-    {
-        // Debug.Log("Pointer Exit Delete Button");
-        HideDeleteButton();
-    }
+    // public void OnPointerEnterDeleteButton()
+    // {
+    //     // Debug.Log("Pointer Enter Delete Button");
+    //     ShowDeleteButton();
+    // }
+    //
+    // public void OnPointerExitDeleteButton()
+    // {
+    //     // Debug.Log("Pointer Exit Delete Button");
+    //     HideDeleteButton();
+    // }
+    //
+    // public void HideDeleteButton()
+    // {
+    //     deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = false;
+    //     deleteRowButton.interactable = false;
+    // }
 
-    public void HideDeleteButton()
-    {
-        deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = false;
-        deleteRowButton.interactable = false;
-    }
-
-    public void ShowDeleteButton()
-    {
-        deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = true;
-        deleteRowButton.interactable = true;
-    }
-    
-    public void DeleteRow()
-    {
-        Destroy(gameObject);
-    }
+    // public void ShowDeleteButton()
+    // {
+    //     deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = true;
+    //     deleteRowButton.interactable = true;
+    // }
+    //
+    // public void DeleteRow()
+    // {
+    //     phonemeTableHandler.tableRowList.Remove(this);
+    //     Destroy(gameObject);
+    // }
     
     //--------------------------------------------------------------------------------
     
     public void UpdateEntries()
     {
+        // change input field to capitalized input
+        // string upper = value.ToUpper();
+        
         // update entries list
         entries[0] = spellingInputField.text;
         entries[1] = soundsLikeDropdown.options[soundsLikeDropdown.value].text;
@@ -81,6 +106,8 @@ public class TableRow : MonoBehaviour
     {
         soundsLikeDropdown.ClearOptions();
         soundsLikeDropdown.AddOptions(options);
+        soundsLikeDropdown.RefreshShownValue();
+        Debug.Log("in set sounds like: " + string.Join(", ", options));
     }
 
     public void DisableInput()
