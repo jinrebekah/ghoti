@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class PuzzleHandler : JournalPage
 {
     // stuff visible in inspector -- I want to have the puzzle build itself from these few things
+    public bool puzzleSolved = false;
     public bool typeSolved = false;
     public bool letterSolved = false;
     
@@ -69,7 +70,8 @@ public class PuzzleHandler : JournalPage
         {
             typeSlot.GetComponentInChildren<Image>().enabled = false; 
         }
-        
+        CheckPuzzleSolved();
+
     }
 
     public void OnLetterSolved()
@@ -90,6 +92,7 @@ public class PuzzleHandler : JournalPage
         {
             letterHandler.draggable = false;
         }
+        CheckPuzzleSolved();
     }
 
     void GenerateTypeSlots()
@@ -155,6 +158,16 @@ public class PuzzleHandler : JournalPage
         }
     }
 
+    void CheckPuzzleSolved()
+    {
+        if (!puzzleSolved && typeSolved && letterSolved)
+        {
+            Debug.Log("Puzzle solved!");
+            puzzleSolved = true;
+            GameManager.Instance.puzzlesSolved++;
+        }
+    }
+    
 	// visual stuff I guess
     // public void Show() // overloads the method in JournalPage
     // {

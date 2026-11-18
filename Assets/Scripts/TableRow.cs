@@ -56,35 +56,36 @@ public class TableRow : MonoBehaviour
     
     // stupid but this whole section is just the delete button
 
-    // public void OnPointerEnterDeleteButton()
-    // {
-    //     // Debug.Log("Pointer Enter Delete Button");
-    //     ShowDeleteButton();
-    // }
-    //
-    // public void OnPointerExitDeleteButton()
-    // {
-    //     // Debug.Log("Pointer Exit Delete Button");
-    //     HideDeleteButton();
-    // }
-    //
-    // public void HideDeleteButton()
-    // {
-    //     deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = false;
-    //     deleteRowButton.interactable = false;
-    // }
+    public void OnPointerEnterDeleteButton()
+    {
+        // Debug.Log("Pointer Enter Delete Button");
+        ShowDeleteButton();
+    }
+    
+    public void OnPointerExitDeleteButton()
+    {
+        // Debug.Log("Pointer Exit Delete Button");
+        HideDeleteButton();
+    }
+    
+    public void HideDeleteButton()
+    {
+        deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = false;
+        deleteRowButton.interactable = false;
+    }
 
-    // public void ShowDeleteButton()
-    // {
-    //     deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = true;
-    //     deleteRowButton.interactable = true;
-    // }
-    //
-    // public void DeleteRow()
-    // {
-    //     phonemeTableHandler.tableRowList.Remove(this);
-    //     Destroy(gameObject);
-    // }
+    public void ShowDeleteButton()
+    {
+        deleteRowButton.GetComponentInChildren<TMP_Text>().enabled = true;
+        deleteRowButton.interactable = true;
+    }
+    
+    public void DeleteRow()
+    {
+        phonemeTableHandler.tableRowList.Remove(this);
+        phonemeTableHandler.numRows--;
+        Destroy(gameObject);
+    }
     
     //--------------------------------------------------------------------------------
     
@@ -104,10 +105,12 @@ public class TableRow : MonoBehaviour
     
     public void SetSoundsLikeOptions(List<string> options)
     {
+        string currentSelection = soundsLikeDropdown.options[soundsLikeDropdown.value].text;
         soundsLikeDropdown.ClearOptions();
         soundsLikeDropdown.AddOptions(options);
+        int index = options.IndexOf(currentSelection);
+        soundsLikeDropdown.value = index >= 0 ? index : 0; // ugh just so it doesn't erase what's currenlty in there
         soundsLikeDropdown.RefreshShownValue();
-        Debug.Log("in set sounds like: " + string.Join(", ", options));
     }
 
     public void DisableInput()

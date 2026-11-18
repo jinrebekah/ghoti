@@ -27,6 +27,7 @@ public class ZoomHandler : MonoBehaviour
 	public UIIcon journalIcon;
 	public UIIcon penIcon;
 	public PuzzleButtonHandler puzzleButton;
+
     
     void Start()
     {

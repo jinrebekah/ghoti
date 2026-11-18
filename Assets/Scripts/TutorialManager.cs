@@ -186,7 +186,6 @@ public class TutorialManager : MonoBehaviour
         GameManager.Instance.UpdateGameState(GameManager.GameState.Playing); // move onto next state
         Debug.Log("Tutorial over");
     }
-
     
     IEnumerator WaitForAnimation(Animator animator, string animationName, string finishedAnimationName="Closed")
     {

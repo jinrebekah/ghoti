@@ -10,9 +10,17 @@ public class GameManager : MonoBehaviour
     
     public IntroManager introManager;
     public TutorialManager tutorialManager;
+    public EndingManager endingManager;
     
     public Transform iconCanvas;
     public JournalHandler journalHandler;
+    public DialogueHandler dialogueHandler;
+    
+    public int puzzlesSolved;
+    private int numPuzzles = 5;
+    public int rowsSolved;
+    private int numRowsPlaying = 3+6; // actually this is the number of rows in intro/playing section, stupid but whatever
+    private int numRowsEnding = 3; // numRows in ending section
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -22,9 +30,9 @@ public class GameManager : MonoBehaviour
         // prepare starting state -- disable/enable everything, etc.
         // UpdateGameState(GameState.Intro); // set state to intro, starts playing intro
         // UpdateGameState(GameState.Tutorial); // for testing tutorial
-        UpdateGameState(GameState.Playing); // for testing playing
+        // UpdateGameState(GameState.Playing); // for testing playing
+        UpdateGameState(GameState.Ending);
         journalHandler.Initialize();
-
     }
 
     void Start()
@@ -55,19 +63,33 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Playing I guess");
                 StartCoroutine(Playing());
                 break;
+            case GameState.Ending:
+                Debug.Log("Ending I guess");
+                StartCoroutine(endingManager.Ending());
+                break;
         }
     }
-    
     
     IEnumerator Playing()
     {
         // make sure UI icons work
         SetGroupActive(iconCanvas, true);
         SetGroupInteractable(iconCanvas, true);
-        // make all puzzle buttons appear and interatable now
-        
-        // yield return new WaitUntil(() => puzzleManager.AllPuzzlesCompleted());
-        // UpdateGameState(GameState.Ending);
+        // make all puzzle buttons appear and interactable now
+
+
+        puzzlesSolved = numPuzzles; /// temp temp temp
+        rowsSolved = numRowsPlaying;
+        yield return new WaitUntil(() => (puzzlesSolved >= numPuzzles));
+        if (rowsSolved < numRowsPlaying)
+        {
+            yield return dialogueHandler.PlayLines(new[]
+            {
+                "I think I've discovered everything from the garden.",
+                "I should finish filling out my table."
+            });
+        }
+        UpdateGameState(GameState.Ending);
         yield break;
     }
     

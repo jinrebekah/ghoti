@@ -11,13 +11,13 @@ public class JournalHandler : MonoBehaviour
     private JournalPage currentPage;
     private int currentPageNumber = 0;
     public JournalPage phonemeTablePage;
-
+    
 
     void Awake()
     {
         
     }
-
+    
 	public void Initialize()
 	{
         Debug.Log("Adding phoneme table page");

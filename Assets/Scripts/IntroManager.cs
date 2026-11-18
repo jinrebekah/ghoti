@@ -109,12 +109,12 @@ public class IntroManager : MonoBehaviour
         // wait until player clicks door button
         yield return WaitForClick(doorPuzzleButton.GetComponent<Button>());
         
-        // yield return WaitForAnimation(doorAnimator, "HandleJiggle");
-        // yield return new WaitForSeconds(1f);
-        // yield return WaitForAnimation(doorAnimator, "HandleJiggle");
-        // yield return new WaitForSeconds(2f);
-        // yield return WaitForAnimation(doorAnimator, "SlotOpening", "LookAround");
-        // yield return new WaitForSeconds(3f);
+        yield return WaitForAnimation(doorAnimator, "HandleJiggle");
+        yield return new WaitForSeconds(1f);
+        yield return WaitForAnimation(doorAnimator, "HandleJiggle");
+        yield return new WaitForSeconds(2f);
+        yield return WaitForAnimation(doorAnimator, "SlotOpening", "LookAround");
+        yield return new WaitForSeconds(3f);
         letterImage.SetActive(true);
         yield return WaitForAnimation(letterAnimator, "LetterFall", "Idle");
         Debug.Log("Letter done falling");
