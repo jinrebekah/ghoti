@@ -34,7 +34,6 @@ public class PenButtonHandler : UIIcon
             Debug.Log("Pen clicked");
 			StartCoroutine(zoomHandler.SketchAppear());
 			journalHandler.DisplayPage(puzzleHandler, false);
-			// make Journal wiggle after animation is done
             Deactivate();
         }
         

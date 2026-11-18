@@ -26,6 +26,7 @@ public class ZoomHandler : MonoBehaviour
 	
 	public UIIcon journalIcon;
 	public UIIcon penIcon;
+	public PuzzleButtonHandler puzzleButton;
     
     void Start()
     {
@@ -83,6 +84,9 @@ public class ZoomHandler : MonoBehaviour
 
     public IEnumerator SketchAppear()
     {
+	    // ugh this is so bad and spread across so many different things
+	    // but anyway at this point the puzzle is safely in the journal so we can change the color
+	    puzzleButton.PuzzleDiscovered();
         animator.Play("SketchAppear", 0, 0f);
 		yield return new WaitForSeconds(2.5f);
 		journalIcon.Jump(loop: true); // wiggle journalButton

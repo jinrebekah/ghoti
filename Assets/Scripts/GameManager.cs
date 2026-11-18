@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TutorialManager tutorialManager;
     
     public Transform iconCanvas;
+    public JournalHandler journalHandler;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
         // UpdateGameState(GameState.Intro); // set state to intro, starts playing intro
         // UpdateGameState(GameState.Tutorial); // for testing tutorial
         UpdateGameState(GameState.Playing); // for testing playing
-        
+        journalHandler.Initialize();
+
     }
 
     void Start()
@@ -55,10 +57,12 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-
+    
+    
     IEnumerator Playing()
     {
         // make sure UI icons work
+        SetGroupActive(iconCanvas, true);
         SetGroupInteractable(iconCanvas, true);
         // make all puzzle buttons appear and interatable now
         
@@ -67,13 +71,21 @@ public class GameManager : MonoBehaviour
         yield break;
     }
     
-    public void SetGroupInteractable(Transform transform, bool interactable)
+    public void SetGroupInteractable(Transform transform, bool interactable) // these two are copied
     {
         foreach (Selectable selectable in transform.GetComponentsInChildren<Selectable>(true))
         {
             selectable.interactable = interactable;
         }
     }
+    public void SetGroupActive(Transform transform, bool active) // for all children, and including itself
+    {
+        foreach (Transform child in transform.GetComponentsInChildren<Transform>(true))
+        {
+            child.gameObject.SetActive(active);
+        }
+    }
+    
     public enum GameState // my list of possible states
     {
         Intro,

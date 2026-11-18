@@ -22,6 +22,7 @@ public class JournalHandler : MonoBehaviour
 	{
         Debug.Log("Adding phoneme table page");
         AddPage(phonemeTablePage); // just make the phoneme table page 0 for now
+        DisplayPage(phonemeTablePage, openJournal: false);
 	}
     
     public void CloseJournal()

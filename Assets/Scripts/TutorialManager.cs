@@ -71,7 +71,7 @@ public class TutorialManager : MonoBehaviour
             "Now I'll sketch the fish!"
         });
         penButton.interactable = true;
-		journal.Initialize(); // have to intialize here so dumb
+		// journal.Initialize(); // have to intialize here so dumb
         yield return WaitForClick(penButton);
         
         // yield return WaitForAnimation(fishSketchImageAnimator, "Idle"); oooh i don't want to use this bc pen button itself is playing the animation

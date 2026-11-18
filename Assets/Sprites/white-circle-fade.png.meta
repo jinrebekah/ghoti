@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ffab79cbc9de6456e98f86144d132ecb
+guid: 403195de4f70b4ee594d913786e2ab95
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8812220926767278503
-    second: lily-flower-ink-black-and-white-drawing-MCCATH_0
+      213: -3406847961419887617
+    second: white-circle-fade_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lily-flower-ink-black-and-white-drawing-MCCATH_0
+      name: white-circle-fade_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1279
-        height: 1390
+        x: 57
+        y: 45
+        width: 561
+        height: 561
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a92a366e3c4b4a70800000000000000
-      internalID: 8812220926767278503
+      spriteID: ffbcdcf44d178b0d0800000000000000
+      internalID: -3406847961419887617
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      lily-flower-ink-black-and-white-drawing-MCCATH_0: 8812220926767278503
+      white-circle-fade_0: -3406847961419887617
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
