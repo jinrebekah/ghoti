@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 5665968}
   - component: {fileID: 5665970}
   - component: {fileID: 5665969}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sunbeams
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5090,8 +5090,7 @@ Transform:
   m_LocalPosition: {x: 0.45807, y: -0.24924, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2142435854}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &84030955
@@ -7315,7 +7314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: asdf
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cecb0d0b97b064b51a71e7480605085b, type: 2}
   m_sharedMaterial: {fileID: 835726591930904598, guid: cecb0d0b97b064b51a71e7480605085b, type: 2}
@@ -7741,10 +7740,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.67413443
-    width: 0.41432664
-    height: 0.41414207
+    x: 0.34026465
+    y: 0
+    width: 0.63852125
+    height: 0.6382979
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -8024,7 +8023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &567343678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14532,7 +14531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &961782364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24426,6 +24425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   dialogueHandler: {fileID: 1849489073}
+  outroDialogueHandler: {fileID: 1199251343}
   message: {fileID: 961782365}
   messageButton: {fileID: 85015326}
   messageInputField: {fileID: 1024195625}
@@ -24436,6 +24436,8 @@ MonoBehaviour:
   phonemeTable: {fileID: 1984812778}
   doorButton: {fileID: 1523466672922825090}
   doorAnimator: {fileID: 2064178419}
+  hiddenDoorButton: {fileID: 8835707191592376270}
+  outroCanvasGroup: {fileID: 2142435858}
 --- !u!114 &1920570950 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 969637308594325503, guid: 0c6771949d56f4c339620d4cbbf36ca5, type: 3}
@@ -25953,14 +25955,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142435853}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 124031200}
   - {fileID: 1199251342}
-  m_Father: {fileID: 78856503}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -26489,13 +26491,14 @@ GameObject:
   - component: {fileID: 8835707191592376268}
   - component: {fileID: 197565304168043793}
   - component: {fileID: 8835707191592376269}
+  - component: {fileID: 8835707191592376270}
   m_Layer: 0
   m_Name: DoorZoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &2923450244267577436
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26839,6 +26842,50 @@ MonoBehaviour:
   zoomCameraPosition: {x: 0.97, y: 0.095}
   zoomCamera: {fileID: 382256664}
   zoomReferenceResolution: {x: 44, y: 50}
+--- !u!114 &8835707191592376270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845532162133311624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 197565304168043793}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -26855,6 +26902,7 @@ SceneRoots:
   - {fileID: 1899398010}
   - {fileID: 206304593}
   - {fileID: 78856503}
+  - {fileID: 2142435854}
   - {fileID: 1209561683}
   - {fileID: 382256664}
   - {fileID: 930984565}

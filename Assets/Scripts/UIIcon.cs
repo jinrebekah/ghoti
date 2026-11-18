@@ -24,7 +24,7 @@ public class UIIcon : MonoBehaviour
         }
         else
         {
-            currentTween = transform.DOPunchPosition(new Vector3(0, 1f, 0), 2.0f);             
+            currentTween = transform.DOPunchPosition(new Vector3(0, 2f, 0), 2.0f);             
         }
     }
 

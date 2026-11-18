@@ -7,6 +7,7 @@ using TMPro;
 public class EndingManager : MonoBehaviour
 {
     public DialogueHandler dialogueHandler;
+    public DialogueHandler outroDialogueHandler;
     
     public MessageHandler message;
     public Button messageButton;
@@ -18,6 +19,9 @@ public class EndingManager : MonoBehaviour
     public PhonemeTableHandler phonemeTable;
     public Button doorButton;
     public Animator doorAnimator;
+    public Button hiddenDoorButton;
+    public CanvasGroup outroCanvasGroup;
+    
     
     
     void Awake()
@@ -32,6 +36,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("Phoneme table all correct");
         yield return DoorSequence();
         // then finish filling in table
+        yield return Outro();
     }
 
     public IEnumerator MessageSequence()
@@ -98,14 +103,37 @@ public class EndingManager : MonoBehaviour
         // prob start playing animation automatically
         yield return WaitForAnimation(doorAnimator, "SlotOpening", "LookAround");
         messageIcon.Jump();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         messageIcon.gameObject.SetActive(false);
-        yield return WaitForAnimation(doorAnimator, "SlotClosed", "Idle");
+        yield return new WaitForSeconds(2f);
+        yield return WaitForAnimation(doorAnimator, "SlotClosed", "Closed");
         if (message.selection == "friend")
         {
-            doorAnimator.Play("Open", 0f, 0f);
-        } 
-
+            Debug.Log("I chose friend");
+            yield return new WaitForSeconds(2f);
+            doorAnimator.Play("Open", 0, 0f);
+            yield return WaitForClick(hiddenDoorButton);
+            Debug.Log("Hidden door button clicked");
+        }
+        else
+        {
+            Debug.Log("I chose foe");
+            yield return dialogueHandler.PlayLines(new[]
+            {
+                "Oh no, the door didn't open :( so sad"
+            });
+        }
+    }
+    public IEnumerator Outro()
+    {
+        outroCanvasGroup.gameObject.SetActive(true);
+        Debug.Log("Starting post ending");
+        outroCanvasGroup.alpha = 0f;
+        yield return outroCanvasGroup.DOFade(1f, 5f).WaitForCompletion();
+        yield return outroDialogueHandler.PlayLines(new[]
+        {
+            "Thanks for playing! -Rebekah (WRUHBBEKUH)"
+        });
     }
     
     IEnumerator WaitForAnimation(Animator animator, string animationName, string finishedAnimationName="Closed")
